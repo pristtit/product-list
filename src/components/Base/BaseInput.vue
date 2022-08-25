@@ -3,6 +3,7 @@
         :value="modelValue"
         @input="updateInput"
         class="base-input"
+        type="text"
     >
 </template>
 
@@ -27,6 +28,7 @@ export default {
     border: 1px solid teal;
     padding: 5px 7px;
     margin: 10px 0;
+    width: 284px;
 }
 
 </style>

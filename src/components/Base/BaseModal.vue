@@ -8,7 +8,6 @@
             <img
                 @click="hideModal"
                 class="base-modal__exit"
-                src="@/assets/x.png"
             >
             <slot></slot>
         </div>
