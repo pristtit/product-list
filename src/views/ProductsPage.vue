@@ -7,7 +7,8 @@
                 :options="sortOptions"
             />
             <list-product
-                :productList="productList"
+                :productList="sortProductList"
+                @remove="removeProduct"
             />
         </div>
     </div>
@@ -22,7 +23,8 @@ export default {
         return {
             sortOptions: [
                 {value: 'name', name: 'По названию'},
-                {value: 'minCost', name: 'По стоимости'},
+                {value: 'minCost', name: 'По стоимости(уменьшение)'},
+                {value: 'maxCost', name: 'По стоимости(возростание)'},
             ],
             selectedSort: 'name',
             productList: JSON.parse(localStorage.getItem('productList')),
@@ -31,8 +33,42 @@ export default {
 
     methods: {
         createProduct(product) {
+            product.id = Date.now();
             this.productList.push(product);
-            localStorage.setItem('productList', JSON.stringify(this.productList ))
+            localStorage.setItem('productList', JSON.stringify(this.productList ));
+        },
+        removeProduct(product) {
+            this.productList = this.productList.filter(p => p.id !== product.id);
+            localStorage.setItem('productList', JSON.stringify(this.productList ));
+        }
+    },
+
+    computed: {
+        sortProductList() {
+            let products = [];
+            switch (this.selectedSort) {
+                case 'name':
+                    products = [...this.productList].sort((product1, product2) => {
+                        return product1[this.selectedSort]?.localeCompare(product2[this.selectedSort])
+                    })
+                    break;
+
+                case 'minCost':
+                    products = [...this.productList].sort((product1, product2) => {
+                        return product1.cost - product2.cost
+                    })
+                    break;
+            
+                case 'maxCost':
+                    products = [...this.productList].sort((product1, product2) => {
+                        return product2.cost - product1.cost
+                    })
+                    break;
+            
+                default:
+                    break;
+            }
+            return products
         }
     },
     created() {

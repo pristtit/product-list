@@ -24,44 +24,39 @@
 
         <h6>Цена товара</h6>
         <base-input
-            v-model="product.cost"
+            v-model="costMask"
             placeholder="Введите цену"
         />
         <h6>Поле является обязательным</h6>
 
-        <base-button @click="createProduct">Добавить товар</base-button>
+        <base-button @click="validAndCreateProduct">Добавить товар</base-button>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-    props: {
-    },
+import useProducts from '@/hooks/useProductList'
+import { costValidation, nameValidation, srcImgValidation } from '@/hooks/useValidation';
 
-    data() {
-        return {
-            product: {
-                name: '',
-                description: '',
-                srcImg: '',
-                cost: '',
-            }
-        }
+
+export default {
+    setup() {
+         const {product, createProduct, costMask} = useProducts();
+         
+         return {product,createProduct, costMask}
     },
 
     methods: {
-        createProduct() {
-            this.$emit('createProduct', this.product)
-            this.product = {
-                name: '',
-                description: '',
-                srcImg: '',
-                cost: '',
-            }
+        validAndCreateProduct() {
+            (   
+                srcImgValidation(this.product.srcImg) &&
+                nameValidation(this.product.name) &&
+                costValidation(this.product.cost) &&
+
+                this.createProduct.call(this)
+            )
         }
     }
-
 }
 </script>
 

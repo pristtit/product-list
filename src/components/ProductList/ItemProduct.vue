@@ -1,5 +1,6 @@
 <template>
     <div class="product">
+        <h4 @click="$emit('remove', product)">у</h4>
         <img class="img" :src="product.srcImg">
         <h3>{{ product.name }}</h3>
         <h4>{{ product.description }}</h4>
