@@ -4,6 +4,7 @@ import BasePostForm from "@/components/Base/BasePostForm";
 import BaseButton from "@/components/Base/BaseButton";
 import BaseLogin from "@/components/Base/BaseLogin";
 import BaseSelect from "@/components/Base/BaseSelect";
+import BaseError from "@/components/Base/BaseError";
 
 
 export default [
@@ -12,5 +13,6 @@ export default [
     BasePostForm,
     BaseButton,
     BaseLogin,
-    BaseSelect
+    BaseSelect,
+    BaseError,
 ];

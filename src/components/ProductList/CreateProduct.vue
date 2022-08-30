@@ -2,32 +2,39 @@
   <div class="create-product">
     <h2>Добавление товара</h2>
     <div class="post-form">
-        <h6>Наименование товара*</h6>
+
+        <h6 class="title-value">Наименование товара*</h6>
         <base-input
             v-model="product.name"
             placeholder="Введите наименование товара"
         />
-        <h6>Поле является обязательным</h6>
+        <base-error
+            :isValid="isNameValid"
+        />
         
-        <h6>Описание товара</h6>
+        <h6 class="title-value">Описание товара</h6>
         <textarea
             v-model="product.description"
             placeholder="Введите описание товара"    
         ></textarea>
 
-        <h6>Ссылка на изображение товара*</h6>
+        <h6 class="title-value">Ссылка на изображение товара*</h6>
         <base-input
             v-model="product.srcImg"
             placeholder="Введите ссылку"
         />
-        <h6>Поле является обязательным</h6>
+        <base-error
+            :isValid="isSrcImgValid"
+        />
 
-        <h6>Цена товара</h6>
+        <h6 class="title-value">Цена товара</h6>
         <base-input
             v-model="costMask"
             placeholder="Введите цену"
         />
-        <h6>Поле является обязательным</h6>
+        <base-error
+            :isValid="isCostValid"
+        />
 
         <base-button @click="validAndCreateProduct">Добавить товар</base-button>
     </div>
@@ -37,24 +44,33 @@
 <script>
 import useProducts from '@/hooks/useProductList'
 import { costValidation, nameValidation, srcImgValidation } from '@/hooks/useValidation';
+import { ref } from '@vue/reactivity';
 
 
 export default {
     setup() {
-         const {product, createProduct, costMask} = useProducts();
-         
-         return {product,createProduct, costMask}
+         let {product, createProduct, costMask} = useProducts();
+         let isNameValid = ref(true);
+         let isCostValid = ref(true);
+         let isSrcImgValid = ref(true);
+
+         return {
+            product,
+            createProduct,
+            costMask,
+            isNameValid,
+            isCostValid,
+            isSrcImgValid
+        }
     },
 
     methods: {
         validAndCreateProduct() {
-            (   
-                srcImgValidation(this.product.srcImg) &&
-                nameValidation(this.product.name) &&
-                costValidation(this.product.cost) &&
+            (this.isNameValid = nameValidation(this.product.name)) &&
+            (this.isSrcImgValid = srcImgValidation(this.product.srcImg)) &&
+            (this.isCostValid = costValidation(this.product.cost)) &&
 
-                this.createProduct.call(this)
-            )
+            this.createProduct.call(this)
         }
     }
 }
@@ -72,5 +88,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.title-value {
+
+}
+
+.valid-error {
+
 }
 </style>
