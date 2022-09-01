@@ -29,7 +29,6 @@ export default {
 
 <style scoped>
 .user-list-item {
-  display: inline-block;
   margin-right: 10px;
 }
 .user-list-enter-active,
@@ -47,5 +46,7 @@ export default {
 .product-list {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+    gap: 16px;
 }
 </style>
