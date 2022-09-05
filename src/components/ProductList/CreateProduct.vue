@@ -8,79 +8,87 @@
             v-model="product.name"
             placeholder="Введите наименование товара"
             :class="{ 'input-valid': !isNameValid }"
+            @blur="isNameValid.call(this, $event)"
         />
         <base-error
-            :isValid="isNameValid"
+            :isValid="!showNameValid"
             class="base-error_position"
-        />
+        >{{ typeNameValid }}</base-error>
         
         <h6 class="title-value">Описание товара</h6>
         <textarea
             class="description"
             v-model="product.description"
-            placeholder="Введите описание товара"    
+            placeholder="Введите описание товара"  
+            @blur="isDescriptionValid.call(this, $event)"  
         ></textarea>
+        <base-error
+            :isValid="!showDescriptionValid"
+            class="base-error_position"
+        >{{ typeDescriptionValid }}</base-error>
 
         <h6 class="title-value">Ссылка на изображение товара*</h6>
         <base-input
             v-model="product.srcImg"
             placeholder="Введите ссылку"
             :class="{ 'input-valid': !isSrcImgValid }"
+            @blur="isSrcImgValid.call(this, $event)"
         />
         <base-error
-            :isValid="isSrcImgValid"
+            :isValid="!showSrcImgValid"
             class="base-error_position"
-        />
+        >{{ typeSrcImgValid }}</base-error>
 
         <h6 class="title-value">Цена товара</h6>
         <base-input
             v-model="costMask"
             placeholder="Введите цену"
             :class="{ 'input-valid': !isCostValid }"
+            @blur="isCostValid.call(this, $event)"
         />
         <base-error
-            :isValid="isCostValid"
+            :isValid="!showCostValid"
             class="base-error_position"
-        />
+        >{{ typeCostValid }}</base-error>
 
-        <base-button class="btn_position" @click="validAndCreateProduct">Добавить товар</base-button>
+        <base-button
+            @click="validAndCreateProduct.call(this)"
+            class="btn_position"
+            :class="{ activeBtn: isFormValid }"
+        >Добавить товар</base-button>
     </div>
   </div>
 </template>
 
-<script>
-import useProducts from '@/hooks/useProductList'
-import { costValidation, nameValidation, srcImgValidation } from '@/hooks/useValidation';
-import { ref } from '@vue/reactivity';
+<script setup>
+import useProducts from '@/hooks/useProduct'
+import useProductValid from '@/hooks/useValidation'
 
+let {product, createProduct, costMask} = useProducts();
+let {
+    typeNameValid,
+    typeDescriptionValid,
+    typeCostValid,
+    typeSrcImgValid,
+    isFormValid,
+    showNameValid,
+    showDescriptionValid,
+    showCostValid,
+    showSrcImgValid,
+    isNameValid,
+    isDescriptionValid,
+    isSrcImgValid,
+    isCostValid,
+} = useProductValid();
 
-export default {
-    setup() {
-         let {product, createProduct, costMask} = useProducts();
-         let isNameValid = ref(true);
-         let isCostValid = ref(true);
-         let isSrcImgValid = ref(true);
-
-         return {
-            product,
-            createProduct,
-            costMask,
-            isNameValid,
-            isCostValid,
-            isSrcImgValid
-        }
-    },
-
-    methods: {
-        validAndCreateProduct() {
-            (this.isNameValid = nameValidation(this.product.name)) &&
-            (this.isSrcImgValid = srcImgValidation(this.product.srcImg)) &&
-            (this.isCostValid = costValidation(this.product.cost)) &&
-
-            this.createProduct.call(this)
-        }
-    }
+const validAndCreateProduct = function() {
+    isFormValid && createProduct.call(this)
+    typeNameValid = true;
+    typeDescriptionValid = true;
+    typeSrcImgValid = true;
+    typeCostValid = true;
 }
+
 </script>
 
 <style scoped>
@@ -172,5 +180,9 @@ export default {
     position: relative;
     height: 0;
     top: -12px;
+}
+
+.activeBtn {
+    background: green;
 }
 </style>
