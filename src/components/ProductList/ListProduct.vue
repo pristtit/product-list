@@ -46,7 +46,6 @@ export default {
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     gap: 16px;
 }
 </style>
