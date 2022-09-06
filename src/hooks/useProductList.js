@@ -1,11 +1,11 @@
 import {ref, computed, onBeforeMount} from 'vue'
 
 export default function useProductList() {
-    const sortOptions = ref(
+    const sortOptions = ref([
         {value: 'name', name: 'По названию'},
         {value: 'minCost', name: 'По стоимости (уменьшение)'},
         {value: 'maxCost', name: 'По стоимости (возростание)'},
-    );
+    ]);
     let selectedSort = ref('name');
     let productList = ref(JSON.parse(localStorage.getItem('productList')));
 

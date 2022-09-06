@@ -24,7 +24,7 @@ let {
     createProduct,
     removeProduct,
     sortProductList,
-    } = useProductList();
+} = useProductList();
 </script>
 
 <style scoped>
