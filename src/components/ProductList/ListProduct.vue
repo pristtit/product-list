@@ -1,6 +1,6 @@
 <template>
   <div class="product-list" v-if="productList.length > 0">
-    <transition-group name="user-list">
+    <transition-group name="animation-list">
       <item-product
         v-for="product in productList"
         :product="product"
@@ -28,19 +28,19 @@ export default {
 </script>
 
 <style scoped>
-.user-list-item {
+.animation-list-item {
   margin-right: 10px;
 }
-.user-list-enter-active,
-.user-list-leave-active {
+.animation-list-enter-active,
+.animation-list-leave-active {
   transition: all 0.4s ease;
 }
-.user-list-enter-from,
-.user-list-leave-to {
+.animation-list-enter-from,
+.animation-list-leave-to {
   opacity: 0;
   transform: translateX(130px);
 }
-.user-list-move {
+.animation-list-move {
   transition: transform 0.4s ease;
 }
 .product-list {
