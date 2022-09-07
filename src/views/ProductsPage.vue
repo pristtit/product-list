@@ -1,5 +1,5 @@
 <template>
-    <CreateProduct class="create-product_geom" @createProduct="createProduct" />
+    <CreateProduct class="create-product" @createProduct="createProduct" />
     <div class="main">
         <base-castom-select
             v-model:curentOption.value="selectedSort"
@@ -24,7 +24,7 @@ let {
     createProduct,
     removeProduct,
     sortProductList,
-    } = useProductList();
+} = useProductList();
 </script>
 
 <style scoped>
@@ -40,5 +40,12 @@ let {
 
 .base-castom-select {
     align-self: flex-end;
+}
+
+.create-product {
+    position:  fixed;
+    left: 32px;
+    top: 32px;
+    padding: 0px;
 }
 </style>

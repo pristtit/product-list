@@ -3,7 +3,6 @@ import {ref, computed} from 'vue'
 
 const _nameValidation = (attr) => {
     if (validator.isEmpty(String(attr))) return 'Поле является обязательным'
-    else if (!validator.isAlphanumeric(String(attr))) return 'Допускаются только буквы и цифры'
     else if (!validator.isLength(String(attr), {min:3, max: 16})) return 'Длина текста от 3 до 16 символов'
 
     return false
@@ -20,15 +19,15 @@ const _costValidation = (attr) => {
 const _srcImgValidation = (attr) => {
     if (validator.isEmpty(String(attr))) return 'Поле является обязательным'
     else if (
-        validator.isURL(String(attr)) &&
+        !validator.isURL(String(attr)) ||
         !['jpg', 'jpeg', 'png'].includes(String(attr).split('.').at(-1))
     ) return 'Ссылка не верна'
-    
+
     return false
 }
 
 const _descriptionValidation = (attr) => {
-    if (!validator.isLength(String(attr), {min:undefined, max: 84})) return 'Не больше 84 символов'
+    if (!validator.isLength(String(attr), {min:undefined, max: 80})) return 'Не больше 80 символов'
 
     return false
 }
