@@ -1,11 +1,7 @@
 <template>
-  <div class="create-product_content-position create-product_appearance">
+  <div class="create-product">
     <h1 class="create-product__title">Добавление товара</h1>
-    <div class="
-        post-form_content-position
-        post-form_dimensions
-        post-form_appearance
-    ">
+    <div class="post-form">
         <h6 class="post-form__title">Наименование товара*</h6>
         <base-input
             v-model="product.name"
@@ -15,24 +11,19 @@
         />
         <base-error
             :isValid="!showNameValid"
-            class="post-form__error_position"
+            class="post-form__error"
         >{{ typeNameValid }}</base-error>
         
         <h6 class="post-form__title">Описание товара</h6>
         <textarea
-            class="
-                post-form__description
-                post-form__description_content-position
-                post-form__description_dimensions
-                post-form__description_appearance
-            "
+            class="post-form__description"
             v-model="product.description"
             placeholder="Введите описание товара"  
             @blur="isDescriptionValid.call(this, $event)"  
         ></textarea>
         <base-error
             :isValid="!showDescriptionValid"
-            class="post-form__error_position"
+            class="post-form__error"
         >{{ typeDescriptionValid }}</base-error>
 
         <h6 class="post-form__title">Ссылка на изображение товара*</h6>
@@ -44,7 +35,7 @@
         />
         <base-error
             :isValid="!showSrcImgValid"
-            class="post-form__error_position"
+            class="post-form__error"
         >{{ typeSrcImgValid }}</base-error>
 
         <h6 class="post-form__title">Цена товара</h6>
@@ -56,13 +47,13 @@
         />
         <base-error
             :isValid="!showCostValid"
-            class="post-form__error_position"
+            class="post-form__error"
         >{{ typeCostValid }}</base-error>
 
         <base-button
             @click="validAndCreateProduct.call(this)"
-            class="post-form__btn_position"
-            :class="{ activeBtn: isFormValid }"
+            class="post-form__btn"
+            :class="{ 'post-form__btn_active': isFormValid }"
         >Добавить товар</base-button>
     </div>
   </div>
@@ -91,21 +82,20 @@ let {
 
 const validAndCreateProduct = function() {
     isFormValid && createProduct.call(this);
-    typeNameValid = true;
-    typeDescriptionValid = true;
-    typeSrcImgValid = true;
-    typeCostValid = true;
+    typeNameValid.value = true;
+    typeDescriptionValid.value = true;
+    typeSrcImgValid.value = true;
+    typeCostValid.value = true;
 }
 
 </script>
 
 <style scoped>
-.create-product_content-position {
+.create-product {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-.create-product_appearance {
+
     background: #FFFEFB;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
@@ -122,16 +112,12 @@ const validAndCreateProduct = function() {
     margin: 8px 0;
 }
 
-.post-form_content-position {
-    padding: 24px;
-}
-
-.post-form_dimensions {
+.post-form {
     width: 332px;
     height: 440px;
-}
 
-.post-form_appearance {
+    padding: 24px;
+
     box-sizing: border-box;
     background: #FFFEFB;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
@@ -149,18 +135,14 @@ const validAndCreateProduct = function() {
     margin: 0;
 }
 
-.post-form__description_content-position {
-    margin: 4px 0 16px 0;
-    padding: 10px 0 0 16px;
-}
-
-.post-form__description_dimensions {
+.post-form__description {
     width: 284px;
     height: 108px;
     resize: none;
-}
 
-.post-form__description_appearance {
+    margin: 4px 0 16px 0;
+    padding: 10px 0 0 16px;
+
     background: #FFFEFB;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -179,11 +161,11 @@ const validAndCreateProduct = function() {
     text-align: left;
 }
 
-.post-form__btn_position {
+.post-form__btn {
     margin-top: 8px;
 }
 
-.post-form__error_position {
+.post-form__error {
     position: relative;
     height: 0;
     top: -12px;
@@ -193,7 +175,7 @@ const validAndCreateProduct = function() {
     border: 1px solid #FF8484;
 }
 
-.activeBtn {
+.post-form__btn_active {
     background: green;
 }
 </style>

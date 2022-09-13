@@ -1,5 +1,5 @@
 <template>
-  <button class="base-button_content base-button_appearance base-button_dimensions">
+  <button class="base-button">
     <slot></slot>
   </button>
 </template>
@@ -11,7 +11,14 @@ export default {
 </script>
 
 <style scoped>
-.base-button_content {
+.base-button {
+    width: 284px;
+    height: 36px;
+
+    background: #EEEEEE;
+    border-radius: 10px;
+    border: none;
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -20,16 +27,5 @@ export default {
     text-align: center;
     letter-spacing: -0.02em;
     color: #B4B4B4;
-}
-
-.base-button_appearance {
-    background: #EEEEEE;
-    border-radius: 10px;
-    border: none;
-}
-
-.base-button_dimensions {
-    width: 284px;
-    height: 36px;
 }
 </style>
