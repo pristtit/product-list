@@ -1,22 +1,22 @@
 <template>
-    <div class="selectCastom selectCastom_dimensions selectCastom_content">
+    <div class="selectCastom">
         <div
             @mousedown="isShow = !isShow"
             class="
                 selectCastom__wrapper
-                selectCastom__wrapper_content-position
-                selectCastom__wrapper_appearance
                 unselectable
             "
         >
             <div class="selectCastom__text">{{ curentOption.name }}</div>
             <div class="
-                selectCastom__arrow_appearance
-                selectCastom__arrow_dimensions
+                selectCastom__arrow
                 selectCastom__arrow_position
             "></div>
         </div>
-        <div v-show="isShow" class="selectCastom__window_appearance selectCastom__window_position">
+        <div v-show="isShow" class="
+            selectCastom__window
+            selectCastom__window_position
+        ">
             <div
                 v-for="option in options"
                 :key="option.value"
@@ -59,16 +59,12 @@ export default {
 
 <style>
 .selectCastom {
-    margin-bottom: 16px;
-    cursor: pointer;
-}
-
-.selectCastom_dimensions {
     height: 36px;
     width: 121.49px;
-}
 
-.selectCastom_content {
+    margin-bottom: 16px;
+    cursor: pointer;
+
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
@@ -80,15 +76,11 @@ export default {
 .selectCastom__wrapper {
     height: 36px;
     color: #B4B4B4;
-}
 
-.selectCastom__wrapper_content-position {
     display: flex;
     align-items: center;
     padding-left: 16px;
-}
 
-.selectCastom__wrapper_appearance {
     box-sizing: border-box;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -107,17 +99,15 @@ export default {
     max-width: 78px;
 }
 
-.selectCastom__arrow_appearance {
+.selectCastom__arrow {
+    width: 4.59px;
+    height: 4.59px;
+
     box-sizing: border-box;
     border: 1px solid #B4B4B4;
     transform: rotate(45deg);
     border-top-style: none;
     border-left-style: none;
-}
-
-.selectCastom__arrow_dimensions {
-    width: 4.59px;
-    height: 4.59px;
 }
 
 .selectCastom__arrow_position {
@@ -126,7 +116,7 @@ export default {
     top: -2px;
 }
 
-.selectCastom__window_appearance {
+.selectCastom__window {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     background: #FFFEFB;

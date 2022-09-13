@@ -31,10 +31,12 @@ let {
 
 .main {
     display: flex;
-    position: absolute;
-    left: 380px;
-    width: 1028px;
     flex-direction: column;
+    position: absolute;
+
+    width: 1028px;
+    
+    left: 380px;
     padding: 32px 32px 0 0;
 }
 

@@ -20,6 +20,7 @@ export default {
 <style scoped>
 .valid-error {
     margin: 0;
+    
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
